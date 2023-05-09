@@ -23,7 +23,7 @@ function successFunction(result) {
     console.log(result[i].name, result[i].calories);
     $("#results").append(
       `<li>
-        Name: ${result[i].name} Calories: <span>${result[i].calories}</span>
+        Name: ${result[i].name} Calories: <span>${Math.round(result[i].calories)}</span>
         <div class="slidecontainer">
         <input data-food="${result[i].name}" data-cals="${result[i].calories}" type="range" min="0" max="500" step="10" value="${result[i].serving_size_g}" class="slider"><p>100</p>
         </div>
@@ -39,6 +39,6 @@ $("#results").on("input", '[type="range"]', function (event) {
   console.log(slider.data("food"));
   calorycalc = (slider.data("cals") / 100) * slider.val();
   console.log(calorycalc);
-  slider.parent().parent().find("span").text(calorycalc);
+  slider.parent().parent().find("span").text(Math.round(calorycalc));
   slider.parent().parent().find("p").text(serving);
 });
