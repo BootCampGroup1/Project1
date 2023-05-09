@@ -1,5 +1,3 @@
-
-
 // call nutrition API
 $("#btn").on("click", function (event) {
   var query = $("#food-input").val();
