@@ -6,10 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- link for Bulma -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <title>Project 1</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <title>Work it Off!</title>
 </head>
 <body>
-    <h1>Project 1</h1>
+    
+    <h1 class="title">Work it Off!</h1>
+<h2 class="subtitle">The Calorie Companion</h2>
+    <div class="is-align-content-center">
+        <label for="search-label">
+            <input id="food-input" type="text" placeholder="Search Foods">
+        </label>
+        <div class="slidecontainer">
+            <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+        </div>
+        <div>
+            <button id="btn">Search</button>
+        </div>  
+        <ul id="results" class="final-result"></ul>
+    </div>
     <script src="assets/js/script.js"></script>
 </body>
 </html>
