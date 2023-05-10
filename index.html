@@ -1,15 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- link for Bulma -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <title>Project 1</title>
-</head>
-<body>
-    <h1>Project 1</h1>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <title>Work it Off!</title>
+  </head>
+  <body>
+    <!-- ADDED SOME BULMA STYLING TO THE PAGE -->
+    <section class="hero is-fullheight is-primary is-bold">
+      <div class="container">
+        <div class="column is-align-content-center">
+          <h1 class="title is-1">Work it Off!</h1>
+          <h2 class="subtitle">The Calorie Companion</h2>
+          <div class="is-align-content-center">
+            <div class="block">
+              <label for="search-label">
+                <input
+                  class="input is-1"
+                  id="food-input"
+                  type="text"
+                  placeholder="Search Foods"
+                />
+              </label>
+
+              <div class="slidecontainer">
+                <input
+                  type="range"
+                  min="1"
+                  max="100"
+                  value="50"
+                  class="slider"
+                  id="myRange"
+                />
+              </div>
+            </div>
+            <div class="block">
+              <button class="button is-primary is-light" id="btn">
+                Search
+              </button>
+            </div>
+            <p >Total Calories: <span id="totalcal"></span></p>
+            <ul id="foodresults" class="final-result"></ul>
+            <ul id="sportresults" class="final-result"></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <script src="assets/js/script.js"></script>
-</body>
+  </body>
 </html>
