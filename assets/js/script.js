@@ -14,8 +14,8 @@ $("#btn").on("click", function (event) {
   });
   $("#food-input").val('')
 });
-// Displays nutrition API results in ul
-// var calorycalc;
+
+// Displays nutrition API results in li's
 function foodFunction(result) {
   console.log(result);
   for (var i = 0; i < result.length; i++) {
@@ -35,6 +35,9 @@ function foodFunction(result) {
   }
   totalCalories();
 }
+
+// event listener for sliders
+// calcs calories based on slider value & updates display
 $("#foodresults").on("input", '[type="range"]', function (event) {
   var slider = $(event.target);
   console.log(slider.val());
@@ -45,24 +48,34 @@ $("#foodresults").on("input", '[type="range"]', function (event) {
   slider.parent().parent().find("span").text(Math.round(calorycalc));
   slider.parent().parent().find("p").text(serving);
   totalCalories();
+  activityTime();
 });
 
+// sums calories into total and displays above food list
 var totalCalories = function() {
-
   var sumCals = 0
   for (var i=0; i < $('.caldata').length; i++) {
     var spanVal = $('.caldata')[i];
     var foodCals = parseInt(spanVal.innerHTML);
     sumCals += foodCals
   }
-  console.log(sumCals);
-
   $("#totalcal").text(sumCals);
 };
 
+// calculates duration needed for activities
+var activityTime = function () {
+  var actCals = parseInt($("#totalcal").text());
+  var calPh = parseInt($('.actcals').text()) / 60;
+  var durNeeded = actCals / calPh
+  console.log(durNeeded);
+  console.log(actCals);
+};
+
+
+
 //random button
 //Second API call
-var activity = "ball";
+var activity = "walk";
 $.ajax({
   method: "GET",
   url: "https://api.api-ninjas.com/v1/caloriesburned?activity=" + activity,
@@ -74,21 +87,20 @@ $.ajax({
   },
 });
 
-// Displays activity API results in ul
-
+// Displays activity API results in li's
 function sportFunction(result) {
   console.log(result);
-  for (var i = 0; i < result.length; i++) {
+  for (var i = 0; i < 1; i++) {
     var sport = result[i].name;
     var calBurned = result[i].calories_per_hour;
     var time = result[i].duration_minutes;
     console.log(sport, calBurned);
     $("#sportresults").append(
       `<li>
-        Name: ${sport} Calories: <span>${calBurned}</span> Time: ${time}
+        Name: ${activity} Calories: <span class="actcals">${calBurned}</span> Time: ${time}
         </li>
     `
     );
   }
-}
+};
 
