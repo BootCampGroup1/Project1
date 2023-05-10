@@ -12,6 +12,7 @@ $("#btn").on("click", function (event) {
       console.error("Error: ", jqXHR.responseText);
     },
   });
+  $("#food-input").val('')
 });
 // Displays nutrition API results in ul
 // var calorycalc;
@@ -47,6 +48,7 @@ $("#foodresults").on("input", '[type="range"]', function (event) {
 });
 
 var totalCalories = function() {
+
   var sumCals = 0
   for (var i=0; i < $('.caldata').length; i++) {
     var spanVal = $('.caldata')[i];
@@ -54,6 +56,8 @@ var totalCalories = function() {
     sumCals += foodCals
   }
   console.log(sumCals);
+
+  $("#totalcal").text(sumCals);
 };
 
 //random button
