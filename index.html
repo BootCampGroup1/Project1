@@ -14,8 +14,8 @@
   </head>
   <body>
     <!-- ADDED SOME BULMA STYLING TO THE PAGE -->
-    <section class="hero is-fullheight is-primary is-bold">
-      <div class="container">
+    <section class="is-flex is-spaced">
+      <div class="hero is-fullheight is-primary is-bold ">
         <div class="column is-align-content-center">
           <h1 class="title is-1">Work it Off!</h1>
           <h2 class="subtitle">The Calorie Companion</h2>
@@ -29,16 +29,8 @@
                   placeholder="Search Foods"
                 />
               </label>
-
               <div class="slidecontainer">
-                <input
-                  type="range"
-                  min="1"
-                  max="100"
-                  value="50"
-                  class="slider"
-                  id="myRange"
-                />
+
               </div>
             </div>
             <div class="block">
@@ -49,6 +41,16 @@
             <p >Total Calories: <span id="totalcal"></span></p>
             <ul id="foodresults" class="final-result"></ul>
             <ul id="sportresults" class="final-result"></ul>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="is-align-content center">
+          <h2 class="title is-1">Here are the recommended workouts</h2>
+          <div class="block is-align-content-center">
+            <label>
+              <input type="text" id="">
+            </label>
           </div>
         </div>
       </div>

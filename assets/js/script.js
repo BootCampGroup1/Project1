@@ -65,10 +65,11 @@ var totalCalories = function() {
 // calculates duration needed for activities
 var activityTime = function () {
   var actCals = parseInt($("#totalcal").text());
-  var calPh = parseInt($('.actcals').text()) / 60;
+  var calPh = parseInt($('#actcals').text()) / 60;
   var durNeeded = actCals / calPh
   console.log(durNeeded);
   console.log(actCals);
+  $('#actdur').text(Math.round(durNeeded));
 };
 
 
@@ -90,14 +91,14 @@ $.ajax({
 // Displays activity API results in li's
 function sportFunction(result) {
   console.log(result);
-  for (var i = 0; i < 1; i++) {
+  for (var i = 0; i < result.length; i++) {
     var sport = result[i].name;
     var calBurned = result[i].calories_per_hour;
     var time = result[i].duration_minutes;
     console.log(sport, calBurned);
     $("#sportresults").append(
       `<li>
-        Name: ${activity} Calories: <span class="actcals">${calBurned}</span> Time: ${time}
+        Name: ${sport} Calories: <span id="actcals">${calBurned}</span> Time: <span id="actdur">${time}</span>
         </li>
     `
     );
