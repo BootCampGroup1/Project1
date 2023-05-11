@@ -12,7 +12,7 @@ $("#btn").on("click", function (event) {
       console.error("Error: ", jqXHR.responseText);
     },
   });
-  $("#food-input").val('')
+  $("#food-input").val("");
 });
 
 // Displays nutrition API results in li's
@@ -25,7 +25,9 @@ function foodFunction(result) {
     console.log(food, calories);
     $("#foodresults").append(
       `<li>
-        Name: ${food} Calories: <span class="caldata">${Math.round(calories)}</span>
+        Name: ${food} Calories: <span class="caldata">${Math.round(
+        calories
+      )}</span>
         <div class="slidecontainer">
         <input data-food="${food}" data-cals="${calories}" type="range" min="0" max="500" step="10" value="${servingSize}" class="slider"><p>100</p>
         </div>
@@ -50,15 +52,16 @@ $("#foodresults").on("input", '[type="range"]', function (event) {
   slider.parent().parent().find("p").text(serving);
   totalCalories();
   activityTime();
+  sportFunction();
 });
 
 // sums calories into total and displays above food list
-var totalCalories = function() {
-  var sumCals = 0
-  for (var i=0; i < $('.caldata').length; i++) {
-    var spanVal = $('.caldata')[i];
+var totalCalories = function () {
+  var sumCals = 0;
+  for (var i = 0; i < $(".caldata").length; i++) {
+    var spanVal = $(".caldata")[i];
     var foodCals = parseInt(spanVal.innerHTML);
-    sumCals += foodCals
+    sumCals += foodCals;
   }
   $("#totalcal").text(sumCals);
 };
@@ -67,21 +70,19 @@ var totalCalories = function() {
 // create loop for classes to calculate for every li
 var activityTime = function () {
   var actCals = parseInt($("#totalcal").text());
-  var calPh = parseInt($('#actcals').text()) / 60;
-  var durNeeded = actCals / calPh
+  var calPh = parseInt($("#actcals").text()) / 60;
+  var durNeeded = actCals / calPh;
   console.log(durNeeded);
   console.log(actCals);
-  $('#actdur').text(Math.round(durNeeded));
+  $("#actdur").text(Math.round(durNeeded));
 };
-
-
 
 //random button
 //Second API call
 
-$('#activity').on('change',function() {
-  var activity = $('#activity').val().substring(1);
-  
+$("#activity").on("change", function () {
+  var activity = $("#activity").val().substring(1);
+
   console.log(activity);
   $.ajax({
     method: "GET",
@@ -92,10 +93,11 @@ $('#activity').on('change',function() {
     error: function ajaxError(jqXHR) {
       console.error("Error: ", jqXHR.responseText);
     },
-  })
+  });
 });
 
 // Displays activity API results in li's
+//
 function sportFunction(result) {
   console.log(result);
   for (var i = 0; i < result.length; i++) {
@@ -110,19 +112,24 @@ function sportFunction(result) {
     `
     );
   }
-};
+}
 
-$(function() {
+$(function () {
   $("#activity").autocomplete({
-    source: function(request, response) {
+    source: function (request, response) {
       var term = request.term;
-      fetch(`https://api.api-ninjas.com/v1/caloriesburned?activity=${encodeURIComponent(term.trim())}`, {
-          headers: { "X-Api-Key": "HRzJF2BzvHXQKhYPJEVAUA==wkK322BmJcvvLHPt" }
-        })
-        .then(function(responseFromAPI) {
+      fetch(
+        `https://api.api-ninjas.com/v1/caloriesburned?activity=${encodeURIComponent(
+          term.trim()
+        )}`,
+        {
+          headers: { "X-Api-Key": "HRzJF2BzvHXQKhYPJEVAUA==wkK322BmJcvvLHPt" },
+        }
+      )
+        .then(function (responseFromAPI) {
           return responseFromAPI.json();
         })
-        .then(function(dataFromAPI) {
+        .then(function (dataFromAPI) {
           var newActivityArray = [];
           for (let i = 0; i < dataFromAPI.length; i++) {
             var element = dataFromAPI[i];
@@ -133,7 +140,7 @@ $(function() {
           }
           response(newActivityArray);
         });
-    }
+    },
     // minLength: 2,
     // select: function( event, ui ) {
     //   log( "Selected: " + ui.item.value + " aka " + ui.item.id );
