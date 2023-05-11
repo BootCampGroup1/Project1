@@ -10,6 +10,9 @@
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
     />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     <title>Work it Off!</title>
   </head>
   <body>
@@ -40,7 +43,6 @@
             </div>
             <p >Total Calories: <span id="totalcal"></span></p>
             <ul id="foodresults" class="final-result"></ul>
-            <ul id="sportresults" class="final-result"></ul>
           </div>
         </div>
       </div>
@@ -49,8 +51,9 @@
           <h2 class="title is-1">Here are the recommended workouts</h2>
           <div class="block is-align-content-center">
             <label>
-              <input type="text" id="">
+              <input type="text" id="activity">
             </label>
+            <ul id="sportresults" class="final-result"></ul>
           </div>
         </div>
       </div>
