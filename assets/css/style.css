@@ -9,3 +9,9 @@
 .fa-github {
   color: #000;
 }
+@media screen and (min-width: 769px) {
+  .team-cards {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
