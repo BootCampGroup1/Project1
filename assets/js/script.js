@@ -34,6 +34,7 @@ function foodFunction(result) {
     );
   }
   totalCalories();
+  activityTime();
 }
 
 // event listener for sliders
@@ -63,6 +64,7 @@ var totalCalories = function() {
 };
 
 // calculates duration needed for activities
+// create loop for classes to calculate for every li
 var activityTime = function () {
   var actCals = parseInt($("#totalcal").text());
   var calPh = parseInt($('#actcals').text()) / 60;
@@ -76,16 +78,21 @@ var activityTime = function () {
 
 //random button
 //Second API call
-var activity = "walk";
-$.ajax({
-  method: "GET",
-  url: "https://api.api-ninjas.com/v1/caloriesburned?activity=" + activity,
-  headers: { "X-Api-Key": "HRzJF2BzvHXQKhYPJEVAUA==wkK322BmJcvvLHPt" },
-  contentType: "application/json",
-  success: sportFunction,
-  error: function ajaxError(jqXHR) {
-    console.error("Error: ", jqXHR.responseText);
-  },
+
+$('#activity').on('change',function() {
+  var activity = $('#activity').val().substring(1);
+  
+  console.log(activity);
+  $.ajax({
+    method: "GET",
+    url: "https://api.api-ninjas.com/v1/caloriesburned?activity=" + activity,
+    headers: { "X-Api-Key": "HRzJF2BzvHXQKhYPJEVAUA==wkK322BmJcvvLHPt" },
+    contentType: "application/json",
+    success: sportFunction,
+    error: function ajaxError(jqXHR) {
+      console.error("Error: ", jqXHR.responseText);
+    },
+  })
 });
 
 // Displays activity API results in li's
@@ -98,10 +105,38 @@ function sportFunction(result) {
     console.log(sport, calBurned);
     $("#sportresults").append(
       `<li>
-        Name: ${sport} Calories: <span id="actcals">${calBurned}</span> Time: <span id="actdur">${time}</span>
+        Name: ${sport} <span style="display: none" id="actcals">${calBurned}</span> Time: <span id="actdur">${time}</span>
         </li>
     `
     );
   }
 };
 
+$(function() {
+  $("#activity").autocomplete({
+    source: function(request, response) {
+      var term = request.term;
+      fetch(`https://api.api-ninjas.com/v1/caloriesburned?activity=${encodeURIComponent(term.trim())}`, {
+          headers: { "X-Api-Key": "HRzJF2BzvHXQKhYPJEVAUA==wkK322BmJcvvLHPt" }
+        })
+        .then(function(responseFromAPI) {
+          return responseFromAPI.json();
+        })
+        .then(function(dataFromAPI) {
+          var newActivityArray = [];
+          for (let i = 0; i < dataFromAPI.length; i++) {
+            var element = dataFromAPI[i];
+            newActivityArray.push({
+              label: element.name,
+              value: element.name,
+            });
+          }
+          response(newActivityArray);
+        });
+    }
+    // minLength: 2,
+    // select: function( event, ui ) {
+    //   log( "Selected: " + ui.item.value + " aka " + ui.item.id );
+    // }
+  });
+});
