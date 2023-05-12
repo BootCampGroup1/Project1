@@ -20,6 +20,8 @@ $("#foosearch").on("click", function (event) {
   $("#food-input").val('')
 });
 
+
+
 //button to delete food items
 var deleteFoodItem = function (food) {
   console.log(food);
@@ -55,6 +57,24 @@ function foodFunction(result) {
   }
   totalCalories();
   activityTime();
+  newData(result);
+}
+
+// localStorage 
+
+var newData = function(result) {
+  var newFood = {
+    'foodData': result[0].name,
+    'caloriesData': result[0].calories
+  };
+  if(JSON.parse(localStorage.getItem('foodCal')) == null){
+    foodCal = [];
+  } else {
+    foodCal = JSON.parse(localStorage.getItem('foodCal'));
+  }
+  foodCal.push(newFood);
+  localStorage.setItem('foodCal', JSON.stringify(foodCal))
+  
 }
 
 // event listener for sliders
