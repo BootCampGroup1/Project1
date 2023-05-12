@@ -60,13 +60,15 @@
                   placeholder="Search Foods"
                 />
               </label>
-              <div class="slidecontainer">
-
-              </div>
             </div>
             <div class="block">
-              <button class="button is-primary is-light" id="btn">
+              <button class="button is-primary is-light" id="foosearch">
                 Search
+              </button>
+            </div>
+            <div class="block">
+              <button class="button is-primary is-light" id="fooclear">
+                Clear
               </button>
             </div>
             <p >Total Calories: <span id="totalcal"></span></p>
@@ -77,10 +79,22 @@
       <div class="column is-one-half">
         <div class="hero column is-fullheight is-info is-bold is-justify-content-flex-start">
           <h2 class="title m-5">The Exercise Equalizer</h2>
-          <div class="block is-align-content-center">
-            <label>
-              <input class="input is-1" type="text" id="activity" placeholder="Search by Activity">
-            </label>
+          <div class="is-align-content-center">
+            <div class="block">
+              <label>
+                <input class="input is-1" type="text" id="activity" placeholder="Search by Activity">
+              </label>
+            </div>
+            <div class="block">
+              <button class="button is-primary is-light" id="actsearch">
+                Search
+              </button>
+            </div>
+            <div class="block">
+              <button class="button is-primary is-light" id="actclear">
+                Clear
+              </button>
+            </div>
             <ul id="sportresults" class="final-result"></ul>
           </div>
         </div>
@@ -89,7 +103,7 @@
 
 <!-- ABOUT US CARDS -->
   <div class="columns team-cards">
-    <div class="column is-half-tablet"><div class="card">
+    <div class="column is-half-tablet is-one-quarter-desktop"><div class="card">
       <div class="card-image">
         <figure class="image is-4by3">
           <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">

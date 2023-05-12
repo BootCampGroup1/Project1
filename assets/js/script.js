@@ -1,5 +1,10 @@
+// prompt user for info
+
+
+
+
 // call nutrition API
-$("#btn").on("click", function (event) {
+$("#foosearch").on("click", function (event) {
   var query = $("#food-input").val();
   console.log(query);
   $.ajax({
@@ -12,8 +17,23 @@ $("#btn").on("click", function (event) {
       console.error("Error: ", jqXHR.responseText);
     },
   });
-  $("#food-input").val("");
+  $("#food-input").val('')
 });
+
+//button to delete food items
+var deleteFoodItem = function (food) {
+  console.log(food);
+  $(`[data-food="${food}"]`).parent().parent().remove()
+  totalCalories();
+  activityTime();
+};
+//button to delete act items
+var deleteActItem = function (sport) {
+  console.log(sport);
+  $(`[data-sport="${sport}"]`).remove()
+  totalCalories();
+  activityTime();
+};
 
 // Displays nutrition API results in li's
 function foodFunction(result) {
@@ -25,11 +45,9 @@ function foodFunction(result) {
     console.log(food, calories);
     $("#foodresults").append(
       `<li>
-        Name: ${food} Calories: <span class="caldata">${Math.round(
-        calories
-      )}</span>
+        Name: ${food} Calories: <span class="caldata">${Math.round(calories)}</span>
         <div class="slidecontainer">
-        <input data-food="${food}" data-cals="${calories}" type="range" min="0" max="500" step="10" value="${servingSize}" class="slider"><p>100</p>
+        <input data-food="${food}" data-cals="${calories}" type="range" min="0" max="500" step="10" value="${servingSize}" class="slider"><p>100</p><button class="delete" onClick="deleteFoodItem('${food}')"></button>
         </div>
         </li>
     `
@@ -52,16 +70,15 @@ $("#foodresults").on("input", '[type="range"]', function (event) {
   slider.parent().parent().find("p").text(serving);
   totalCalories();
   activityTime();
-  sportFunction();
 });
 
 // sums calories into total and displays above food list
-var totalCalories = function () {
-  var sumCals = 0;
-  for (var i = 0; i < $(".caldata").length; i++) {
-    var spanVal = $(".caldata")[i];
+var totalCalories = function() {
+  var sumCals = 0
+  for (var i=0; i < $('.caldata').length; i++) {
+    var spanVal = $('.caldata')[i];
     var foodCals = parseInt(spanVal.innerHTML);
-    sumCals += foodCals;
+    sumCals += foodCals
   }
   $("#totalcal").text(sumCals);
 };
@@ -70,66 +87,72 @@ var totalCalories = function () {
 // create loop for classes to calculate for every li
 var activityTime = function () {
   var actCals = parseInt($("#totalcal").text());
-  var calPh = parseInt($("#actcals").text()) / 60;
-  var durNeeded = actCals / calPh;
-  console.log(durNeeded);
-  console.log(actCals);
-  $("#actdur").text(Math.round(durNeeded));
+  if (!actCals) {
+    $('#sportresults li').each( function(index) {
+      $(this).find('.actdur').text('');
+    })
+    return;
+  }
+  $('#sportresults li').each( function(index) {
+    var calPh = parseInt($(this).find('.actcals').text()) / 60;
+    var durNeeded = actCals / calPh
+    console.log(durNeeded);
+    console.log(actCals);
+    $(this).find('.actdur').text(Math.round(durNeeded));
+  })
 };
+
+
 
 //random button
 //Second API call
-
-$("#activity").on("change", function () {
-  var activity = $("#activity").val().substring(1);
-
+$('#actsearch').on('click',function() {
+  var activity = $('#activity').val().substring(1);
+  // var weight = $('#weightinput').val();
+  var weight = 500;
   console.log(activity);
   $.ajax({
     method: "GET",
-    url: "https://api.api-ninjas.com/v1/caloriesburned?activity=" + activity,
+    url: "https://api.api-ninjas.com/v1/caloriesburned?activity=" + activity+ '&weight=' + weight,
     headers: { "X-Api-Key": "HRzJF2BzvHXQKhYPJEVAUA==wkK322BmJcvvLHPt" },
     contentType: "application/json",
     success: sportFunction,
     error: function ajaxError(jqXHR) {
       console.error("Error: ", jqXHR.responseText);
     },
-  });
+  })
 });
 
 // Displays activity API results in li's
-//
 function sportFunction(result) {
   console.log(result);
+  // adjust length of list dependent on appearance
   for (var i = 0; i < result.length; i++) {
     var sport = result[i].name;
     var calBurned = result[i].calories_per_hour;
     var time = result[i].duration_minutes;
     console.log(sport, calBurned);
     $("#sportresults").append(
-      `<li>
-        Name: ${sport} <span style="display: none" id="actcals">${calBurned}</span> Time: <span id="actdur">${time}</span>
+      `<li data-sport="${sport}">
+        Name: ${sport} <span style="display: none" class="actcals" >${calBurned}</span> Time: <span class="actdur">${time}</span><button class="delete" onClick="deleteActItem('${sport}')"></button>
         </li>
     `
     );
   }
-}
+  activityTime()
+};
 
-$(function () {
+$(function() {
   $("#activity").autocomplete({
-    source: function (request, response) {
+    source: function(request, response) {
       var term = request.term;
-      fetch(
-        `https://api.api-ninjas.com/v1/caloriesburned?activity=${encodeURIComponent(
-          term.trim()
-        )}`,
-        {
-          headers: { "X-Api-Key": "HRzJF2BzvHXQKhYPJEVAUA==wkK322BmJcvvLHPt" },
-        }
-      )
-        .then(function (responseFromAPI) {
+      fetch(`https://api.api-ninjas.com/v1/caloriesburned?activity=${encodeURIComponent(term.trim())}`, {
+          headers: { "X-Api-Key": "HRzJF2BzvHXQKhYPJEVAUA==wkK322BmJcvvLHPt" }
+        })
+        .then(function(responseFromAPI) {
           return responseFromAPI.json();
         })
-        .then(function (dataFromAPI) {
+        .then(function(dataFromAPI) {
           var newActivityArray = [];
           for (let i = 0; i < dataFromAPI.length; i++) {
             var element = dataFromAPI[i];
@@ -140,10 +163,19 @@ $(function () {
           }
           response(newActivityArray);
         });
-    },
+    }
     // minLength: 2,
     // select: function( event, ui ) {
     //   log( "Selected: " + ui.item.value + " aka " + ui.item.id );
     // }
   });
+});
+
+$('#fooclear').on('click',function(){
+  $('#foodresults li').remove()
+});
+
+
+$('#actclear').on('click', function(){
+  $('#sportresults li').remove()
 });
