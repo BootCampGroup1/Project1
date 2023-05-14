@@ -1,8 +1,5 @@
 // prompt user for info
 
-
-
-
 // call nutrition API
 $("#foosearch").on("click", function (event) {
   var query = $("#food-input").val();
@@ -17,7 +14,7 @@ $("#foosearch").on("click", function (event) {
       console.error("Error: ", jqXHR.responseText);
     },
   });
-  $("#food-input").val('')
+  $("#food-input").val("");
 });
 
 
@@ -25,14 +22,14 @@ $("#foosearch").on("click", function (event) {
 //button to delete food items
 var deleteFoodItem = function (food) {
   console.log(food);
-  $(`[data-food="${food}"]`).parent().parent().remove()
+  $(`[data-food="${food}"]`).parent().parent().remove();
   totalCalories();
   activityTime();
 };
 //button to delete act items
 var deleteActItem = function (sport) {
   console.log(sport);
-  $(`[data-sport="${sport}"]`).remove()
+  $(`[data-sport="${sport}"]`).remove();
   totalCalories();
   activityTime();
 };
@@ -47,7 +44,9 @@ function foodFunction(result) {
     console.log(food, calories);
     $("#foodresults").append(
       `<li>
-        Name: ${food} Calories: <span class="caldata">${Math.round(calories)}</span>
+        Name: ${food} Calories: <span class="caldata">${Math.round(
+        calories
+      )}</span>
         <div class="slidecontainer">
         <input data-food="${food}" data-cals="${calories}" type="range" min="0" max="500" step="10" value="${servingSize}" class="slider"><p>100</p><button class="delete" onClick="deleteFoodItem('${food}')"></button>
         </div>
@@ -93,12 +92,12 @@ $("#foodresults").on("input", '[type="range"]', function (event) {
 });
 
 // sums calories into total and displays above food list
-var totalCalories = function() {
-  var sumCals = 0
-  for (var i=0; i < $('.caldata').length; i++) {
-    var spanVal = $('.caldata')[i];
+var totalCalories = function () {
+  var sumCals = 0;
+  for (var i = 0; i < $(".caldata").length; i++) {
+    var spanVal = $(".caldata")[i];
     var foodCals = parseInt(spanVal.innerHTML);
-    sumCals += foodCals
+    sumCals += foodCals;
   }
   $("#totalcal").text(sumCals);
 };
@@ -108,39 +107,41 @@ var totalCalories = function() {
 var activityTime = function () {
   var actCals = parseInt($("#totalcal").text());
   if (!actCals) {
-    $('#sportresults li').each( function(index) {
-      $(this).find('.actdur').text('');
-    })
+    $("#sportresults li").each(function (index) {
+      $(this).find(".actdur").text("");
+    });
     return;
   }
-  $('#sportresults li').each( function(index) {
-    var calPh = parseInt($(this).find('.actcals').text()) / 60;
-    var durNeeded = actCals / calPh
+  $("#sportresults li").each(function (index) {
+    var calPh = parseInt($(this).find(".actcals").text()) / 60;
+    var durNeeded = actCals / calPh;
     console.log(durNeeded);
     console.log(actCals);
-    $(this).find('.actdur').text(Math.round(durNeeded));
-  })
+    $(this).find(".actdur").text(Math.round(durNeeded));
+  });
 };
-
-
 
 //random button
 //Second API call
-$('#actsearch').on('click',function() {
-  var activity = $('#activity').val().substring(1);
+$("#actsearch").on("click", function () {
+  var activity = $("#activity").val().substring(1);
   // var weight = $('#weightinput').val();
   var weight = 500;
   console.log(activity);
   $.ajax({
     method: "GET",
-    url: "https://api.api-ninjas.com/v1/caloriesburned?activity=" + activity+ '&weight=' + weight,
+    url:
+      "https://api.api-ninjas.com/v1/caloriesburned?activity=" +
+      activity +
+      "&weight=" +
+      weight,
     headers: { "X-Api-Key": "HRzJF2BzvHXQKhYPJEVAUA==wkK322BmJcvvLHPt" },
     contentType: "application/json",
     success: sportFunction,
     error: function ajaxError(jqXHR) {
       console.error("Error: ", jqXHR.responseText);
     },
-  })
+  });
 });
 
 // Displays activity API results in li's
@@ -159,20 +160,25 @@ function sportFunction(result) {
     `
     );
   }
-  activityTime()
-};
+  activityTime();
+}
 
-$(function() {
+$(function () {
   $("#activity").autocomplete({
-    source: function(request, response) {
+    source: function (request, response) {
       var term = request.term;
-      fetch(`https://api.api-ninjas.com/v1/caloriesburned?activity=${encodeURIComponent(term.trim())}`, {
-          headers: { "X-Api-Key": "HRzJF2BzvHXQKhYPJEVAUA==wkK322BmJcvvLHPt" }
-        })
-        .then(function(responseFromAPI) {
+      fetch(
+        `https://api.api-ninjas.com/v1/caloriesburned?activity=${encodeURIComponent(
+          term.trim()
+        )}`,
+        {
+          headers: { "X-Api-Key": "HRzJF2BzvHXQKhYPJEVAUA==wkK322BmJcvvLHPt" },
+        }
+      )
+        .then(function (responseFromAPI) {
           return responseFromAPI.json();
         })
-        .then(function(dataFromAPI) {
+        .then(function (dataFromAPI) {
           var newActivityArray = [];
           for (let i = 0; i < dataFromAPI.length; i++) {
             var element = dataFromAPI[i];
@@ -183,7 +189,7 @@ $(function() {
           }
           response(newActivityArray);
         });
-    }
+    },
     // minLength: 2,
     // select: function( event, ui ) {
     //   log( "Selected: " + ui.item.value + " aka " + ui.item.id );
@@ -191,11 +197,61 @@ $(function() {
   });
 });
 
-$('#fooclear').on('click',function(){
-  $('#foodresults li').remove()
+$("#fooclear").on("click", function () {
+  $("#foodresults li").remove();
 });
 
+$("#actclear").on("click", function () {
+  $("#sportresults li").remove();
+});
 
-$('#actclear').on('click', function(){
-  $('#sportresults li').remove()
+// Triggering Modal//
+document.addEventListener("DOMContentLoaded", () => {
+  // Functions to open and close a modal
+  function openModal($el) {
+    $el.classList.add("is-active");
+  }
+
+  function closeModal($el) {
+    $el.classList.remove("is-active");
+  }
+
+  function closeAllModals() {
+    (document.querySelectorAll(".modal") || []).forEach(($modal) => {
+      closeModal($modal);
+    });
+  }
+
+  // Add a click event on buttons to open a specific modal
+  (document.querySelectorAll(".js-modal-trigger") || []).forEach(($trigger) => {
+    const modal = $trigger.dataset.target;
+    const $target = document.getElementById(modal);
+
+    $trigger.addEventListener("click", () => {
+      openModal($target);
+    });
+  });
+
+  // Add a click event on various child elements to close the parent modal
+  (
+    document.querySelectorAll(
+      ".modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button"
+    ) || []
+  ).forEach(($close) => {
+    const $target = $close.closest(".modal");
+
+    $close.addEventListener("click", () => {
+      closeModal($target);
+    });
+  });
+
+  // Add a keyboard event to close all modals
+  document.addEventListener("keydown", (event) => {
+    const e = event || window.event;
+
+    if (e.keyCode === 27) {
+      // Escape key
+      closeAllModals();
+    }
+  });
 });
