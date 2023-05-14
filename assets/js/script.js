@@ -47,7 +47,7 @@ function foodFunction(result) {
       `<li>
         Name: ${food} Calories: <span class="caldata">${Math.round(calories)}</span>
         <div class="slidecontainer">
-        <input data-food="${food}" data-cals="${calories}" type="range" min="0" max="500" step="10" value="${servingSize}" class="slider"><p>100</p><button class="delete" onClick="deleteFoodItem('${food}')"></button>
+        <input data-food="${food}" data-cals="${calories}" type="range" min="0" max="500" step="10" value="${servingSize}" class="slider"><p>100</p><button class="button is-danger is-outlined is-small" onClick="deleteFoodItem('${food}')"><i class="fas fa-times"></i></button>
         </div>
         </li>
     `
@@ -121,6 +121,7 @@ $('#actsearch').on('click',function() {
       console.error("Error: ", jqXHR.responseText);
     },
   })
+  $("#activity").val('')
 });
 
 // Displays activity API results in li's
@@ -134,7 +135,9 @@ function sportFunction(result) {
     console.log(sport, calBurned);
     $("#sportresults").append(
       `<li data-sport="${sport}">
-        Name: ${sport} <span style="display: none" class="actcals" >${calBurned}</span> Time: <span class="actdur">${time}</span><button class="delete" onClick="deleteActItem('${sport}')"></button>
+        Name: ${sport} <span style="display: none" class="actcals" >${calBurned}</span> Time: <span class="actdur">${time}</span><button class="button is-danger is-outlined is-small" onClick="deleteActItem('${sport}')"><span class="icon is-small">
+        <i class="fas fa-times"></i>
+      </span></button>
         </li>
     `
     );
