@@ -5,9 +5,10 @@
 .title {
   font-family: "Booker";
   -webkit-font-smoothing: antialiased;
+  color: #2b292d;
 }
 .fa-github {
-  color: #000;
+  color: #2b292d;
 }
 @media screen and (min-width: 769px) {
   .team-cards {
