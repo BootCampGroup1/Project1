@@ -17,8 +17,6 @@ $("#foosearch").on("click", function (event) {
   $("#food-input").val("");
 });
 
-
-
 //button to delete food items
 var deleteFoodItem = function (food) {
   console.log(food);
@@ -48,7 +46,7 @@ function foodFunction(result) {
         calories
       )}</span>
         <div class="slidecontainer">
-        <input data-food="${food}" data-cals="${calories}" type="range" min="0" max="500" step="10" value="${servingSize}" class="slider"><p>100</p><button class="button is-danger is-outlined is-small" onClick="deleteFoodItem('${food}')"><i class="fas fa-times"></i></button>
+        <input data-food="${food}" data-cals="${calories}" type="range" min="0" max="500" step="10" value="${servingSize}" class="slider"><p>100</p><button class="delete" onClick="deleteFoodItem('${food}')"><i class="fas fa-times"></i></button>
         </div>
         </li>
     `
@@ -59,22 +57,21 @@ function foodFunction(result) {
   newData(result);
 }
 
-// localStorage 
+// localStorage
 
-var newData = function(result) {
+var newData = function (result) {
   var newFood = {
-    'foodData': result[0].name,
-    'caloriesData': result[0].calories
+    foodData: result[0].name,
+    caloriesData: result[0].calories,
   };
-  if(JSON.parse(localStorage.getItem('foodCal')) == null){
+  if (JSON.parse(localStorage.getItem("foodCal")) == null) {
     foodCal = [];
   } else {
-    foodCal = JSON.parse(localStorage.getItem('foodCal'));
+    foodCal = JSON.parse(localStorage.getItem("foodCal"));
   }
   foodCal.push(newFood);
-  localStorage.setItem('foodCal', JSON.stringify(foodCal))
-  
-}
+  localStorage.setItem("foodCal", JSON.stringify(foodCal));
+};
 
 // event listener for sliders
 // calcs calories based on slider value & updates display
@@ -141,8 +138,8 @@ $("#actsearch").on("click", function () {
     error: function ajaxError(jqXHR) {
       console.error("Error: ", jqXHR.responseText);
     },
-  })
-  $("#activity").val('')
+  });
+  $("#activity").val("");
 });
 
 // Displays activity API results in li's
@@ -156,7 +153,7 @@ function sportFunction(result) {
     console.log(sport, calBurned);
     $("#sportresults").append(
       `<li data-sport="${sport}">
-        Name: ${sport} <span style="display: none" class="actcals" >${calBurned}</span> Time: <span class="actdur">${time}</span><button class="button is-danger is-outlined is-small" onClick="deleteActItem('${sport}')"><span class="icon is-small">
+        Name: ${sport} <span style="display: none" class="actcals" >${calBurned}</span> Time: <span class="actdur">${time}</span><button class="delete" onClick="deleteActItem('${sport}')"><span class="icon is-small">
         <i class="fas fa-times"></i>
       </span></button>
         </li>
@@ -202,8 +199,8 @@ $(function () {
 
 $("#fooclear").on("click", function () {
   $("#foodresults li").remove();
-  totalCalories()
-  activityTime()
+  totalCalories();
+  activityTime();
 });
 
 $("#actclear").on("click", function () {

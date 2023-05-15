@@ -22,9 +22,10 @@
   <body>
     <!-- BULMA NAVBAR -->
 
-    <div class="block">
+    <div class="block" style="background-color: lightgrey">
       <nav
         class="nav columns is-justify-content-space-between is-align-items-flex-end mt-1"
+        style="background-color: white"
       >
         <div class="nav-left column is-one-third mt-1">
           <a href="./index.html">
@@ -57,83 +58,87 @@
         </div>
       </nav>
 
-      <section class="section is-medium" style="background-color: lightgrey">
-        <h1 class="title has-text-centered">Get Started</h1>
-        <h2 class="subtitle has-text-centered">
-          Welcome to <strong>"Work it Off!"</strong>, your personal guide to
-          eating with freedom and keeping off the pounds.
-        </h2>
-        <button
-          class="js-modal-trigger button is-info is-fullwidth"
-          data-target="input-modal"
-        >
-          We Just Need a Few Details
-        </button>
-      </section>
-      <!-- ADDED SOME BULMA STYLING TO THE PAGE -->
-      <section class="columns is-gapless is-active">
-        <div class="column is-bold is-one-half">
-          <div
-            class="hero column is-primary is-fullheight is-justify-content-flex-start"
+      <div class="container">
+        <section class="section is-medium">
+          <h1 class="title has-text-centered">Get Started</h1>
+          <h2 class="subtitle has-text-centered">
+            Welcome to <strong>"Work it Off!"</strong>, your personal guide to
+            eating with freedom and keeping off the pounds.
+          </h2>
+          <button
+            class="js-modal-trigger button is-info is-fullwidth"
+            data-target="input-modal"
           >
-            <h2 class="title m-5 has-text-centered">The Calorie Companion</h2>
-            <div class="is-align-content-center">
-              <div class="block">
-                <label for="search-label">
-                  <input
-                    class="input is-1"
-                    id="food-input"
-                    type="text"
-                    placeholder="Search Foods"
-                  />
-                </label>
+            We Just Need a Few Details
+          </button>
+        </section>
+        <!-- ADDED SOME BULMA STYLING TO THE PAGE -->
+        <section class="columns is-gapless is-active">
+          <div class="column is-bold is-one-half">
+            <div
+              class="hero column is-primary is-fullheight is-justify-content-flex-start"
+            >
+              <h2 class="title m-5 has-text-centered">The Calorie Companion</h2>
+              <div class="is-align-content-center">
+                <div class="block">
+                  <label for="search-label">
+                    <input
+                      class="input is-1"
+                      id="food-input"
+                      type="text"
+                      placeholder="Search Foods"
+                    />
+                  </label>
+                </div>
+                <div class="block">
+                  <button class="button is-primary is-light" id="foosearch">
+                    Search
+                  </button>
+                </div>
+                <div class="block">
+                  <button class="button is-primary is-light" id="fooclear">
+                    Clear
+                  </button>
+                </div>
+                <p>Total Calories: <span id="totalcal"></span></p>
+                <ul id="foodresults" class="final-result"></ul>
               </div>
-              <div class="block">
-                <button class="button is-primary is-light" id="foosearch">
-                  Search
-                </button>
-              </div>
-              <div class="block">
-                <button class="button is-primary is-light" id="fooclear">
-                  Clear
-                </button>
-              </div>
-              <p>Total Calories: <span id="totalcal"></span></p>
-              <ul id="foodresults" class="final-result"></ul>
             </div>
           </div>
-        </div>
-        <div class="column is-one-half">
-          <div
-            class="hero column is-fullheight is-info is-bold is-justify-content-flex-start"
-          >
-            <h2 class="title m-5 has-text-centered">The Exercise Equalizer</h2>
-            <div class="is-align-content-center">
-              <div class="block">
-                <label>
-                  <input
-                    class="input is-1"
-                    type="text"
-                    id="activity"
-                    placeholder="Search by Activity"
-                  />
-                </label>
+          <div class="column is-one-half">
+            <div
+              class="hero column is-fullheight is-info is-bold is-justify-content-flex-start"
+            >
+              <h2 class="title m-5 has-text-centered">
+                The Exercise Equalizer
+              </h2>
+              <div class="is-align-content-center">
+                <div class="block">
+                  <label>
+                    <input
+                      class="input is-1"
+                      type="text"
+                      id="activity"
+                      placeholder="Search by Activity"
+                    />
+                  </label>
+                </div>
+                <div class="block">
+                  <button class="button is-info is-light" id="actsearch">
+                    Search
+                  </button>
+                </div>
+                <div class="block">
+                  <button class="button is-info is-light" id="actclear">
+                    Clear
+                  </button>
+                </div>
+                <ul id="sportresults" class="final-result"></ul>
               </div>
-              <div class="block">
-                <button class="button is-info is-light" id="actsearch">
-                  Search
-                </button>
-              </div>
-              <div class="block">
-                <button class="button is-info is-light" id="actclear">
-                  Clear
-                </button>
-              </div>
-              <ul id="sportresults" class="final-result"></ul>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </div>
 
     <!-- MODAL CARD WITH 3 INPUTS, SAVE AND CANCEL BUTTONS. -->
