@@ -59,7 +59,7 @@
       </nav>
 
       <div class="container">
-        <section class="section is-medium">
+        <section class="section is-medium" id="getstarted">
           <h1 class="title has-text-centered">Get Started</h1>
           <h2 class="subtitle has-text-centered">
             Welcome to <strong>"Work it Off!"</strong>, your personal guide to
@@ -72,6 +72,25 @@
             We Just Need a Few Details
           </button>
         </section>
+        <section class="section is-medium is-hidden" id="userinfo">
+          <h1 class="title has-text-centered">Your info</h1>
+          <h3 class="subtitle has-text-centered">
+            <strong>Name:</strong><span id="editname"></span>
+          </h3>
+          <h3 class="subtitle has-text-centered">
+            <strong>Age:</strong><span id="editage"></span>
+          </h3>
+          <h3 class="subtitle has-text-centered">
+            <strong>Weight:</strong><span id="editweight"></span>
+          </h3>
+          <button
+            id="editinfo"
+            class="js-modal-trigger button is-info is-fullwidth"
+            data-target="input-modal"
+          >
+            Edit Info
+          </button>
+        </section>
         <!-- ADDED SOME BULMA STYLING TO THE PAGE -->
         <section class="columns is-gapless is-active">
           <div class="column is-bold is-one-half">
@@ -80,28 +99,50 @@
             >
               <h2 class="title m-5 has-text-centered">The Calorie Companion</h2>
               <div class="is-align-content-center">
-                <div class="block">
-                  <label for="search-label">
-                    <input
-                      class="input is-1"
-                      id="food-input"
-                      type="text"
-                      placeholder="Search Foods"
-                    />
-                  </label>
+                <div class="field is-grouped">
+                  <div class="control is-expanded">
+                    <label>
+                      <input
+                        class="input"
+                        id="food-input"
+                        type="text"
+                        placeholder="Search Foods"
+                    /></label>
+                    <label class="radio">
+                      <input
+                        type="radio"
+                        class="units"
+                        id="gramcheck"
+                        name="units"
+                      />
+                      grams
+                    </label>
+                    <label class="radio">
+                      <input
+                        type="radio"
+                        class="units"
+                        id="ozcheck"
+                        name="units"
+                        checked
+                      />
+                      ounces
+                    </label>
+                  </div>
+                  <div class="control">
+                    <button class="button is-primary is-light" id="foosearch">
+                      Search
+                    </button>
+                  </div>
+                  <div class="control">
+                    <button class="button is-primary is-light" id="fooclear">
+                      Clear
+                    </button>
+                  </div>
                 </div>
-                <div class="block">
-                  <button class="button is-primary is-light" id="foosearch">
-                    Search
-                  </button>
-                </div>
-                <div class="block">
-                  <button class="button is-primary is-light" id="fooclear">
-                    Clear
-                  </button>
-                </div>
-                <p>Total Calories: <span id="totalcal"></span></p>
                 <ul id="foodresults" class="final-result"></ul>
+                <p class="has-text-centered has-text-weight-bold is-size-5">
+                  Total Calories: <span id="totalcal"></span>
+                </p>
               </div>
             </div>
           </div>
@@ -113,25 +154,26 @@
                 The Exercise Equalizer
               </h2>
               <div class="is-align-content-center">
-                <div class="block">
-                  <label>
+                <div class="field is-grouped">
+                  <div class="control is-expanded">
+                    <label></label>
                     <input
-                      class="input is-1"
+                      class="input"
                       type="text"
                       id="activity"
                       placeholder="Search by Activity"
                     />
-                  </label>
-                </div>
-                <div class="block">
-                  <button class="button is-info is-light" id="actsearch">
-                    Search
-                  </button>
-                </div>
-                <div class="block">
-                  <button class="button is-info is-light" id="actclear">
-                    Clear
-                  </button>
+                  </div>
+                  <div class="control">
+                    <button class="button is-info is-light" id="actsearch">
+                      Search
+                    </button>
+                  </div>
+                  <div class="control">
+                    <button class="button is-info is-light" id="actclear">
+                      Clear
+                    </button>
+                  </div>
                 </div>
                 <ul id="sportresults" class="final-result"></ul>
               </div>
@@ -151,12 +193,29 @@
           <button class="delete" aria-label="close"></button>
         </header>
         <section class="modal-card-body">
-          <input class="block input is-info" type="text" placeholder="NAME" />
-          <input class="block input is-info" type="text" placeholder="AGE" />
-          <input class="block input is-info" type="text" placeholder="WEIGHT" />
+          <input
+            id="name"
+            class="block input is-info"
+            type="text"
+            placeholder="NAME"
+          />
+          <input
+            id="age"
+            class="block input is-info"
+            type="text"
+            placeholder="AGE"
+          />
+          <input
+            id="weight"
+            class="block input is-info"
+            type="text"
+            placeholder="WEIGHT"
+          />
         </section>
         <footer class="modal-card-foot">
-          <button class="button is-success">Save changes</button>
+          <button class="button is-success save-profile" id="saveprofile">
+            Save changes
+          </button>
           <button class="button">Cancel</button>
         </footer>
         <button class="modal-close is-large" aria-label="close"></button>

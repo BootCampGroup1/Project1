@@ -35,18 +35,27 @@ var deleteActItem = function (sport) {
 // Displays nutrition API results in li's
 function foodFunction(result) {
   console.log(result);
+  if ($("#ozcheck").prop("checked")) {
+    var convFactor = 28.3495;
+    var uOm = "oz";
+  } else if ($("#gramcheck").prop("checked")) {
+    var convFactor = 1;
+    var uOm = "g";
+  }
   for (var i = 0; i < result.length; i++) {
     var food = result[i].name;
     var calories = result[i].calories;
-    var servingSize = result[i].serving_size_g;
+    var servingSizeGrams = Math.round(result[i].serving_size_g);
+    var servingSizeConv = Math.round(result[i].serving_size_g / convFactor);
     console.log(food, calories);
+    console.log(convFactor);
     $("#foodresults").append(
       `<li>
         Name: ${food} Calories: <span class="caldata">${Math.round(
         calories
       )}</span>
         <div class="slidecontainer">
-        <input data-food="${food}" data-cals="${calories}" type="range" min="0" max="500" step="10" value="${servingSize}" class="slider"><p>100</p><button class="delete" onClick="deleteFoodItem('${food}')"><i class="fas fa-times"></i></button>
+        <input data-food="${food}" data-cals="${calories}" type="range" min="0" max="500" step="10" value="${servingSizeGrams}" class="slider"><p><span class="servSize">${servingSizeConv}</span> <span class="uom">${uOm}</span></p><button class="delete" onClick="deleteFoodItem('${food}')"><i class="fas fa-times"></i></button>
         </div>
         </li>
     `
@@ -78,14 +87,39 @@ var newData = function (result) {
 $("#foodresults").on("input", '[type="range"]', function (event) {
   var slider = $(event.target);
   console.log(slider.val());
-  var serving = slider.val();
+  if ($("#ozcheck").prop("checked")) {
+    var convFactor = 28.3495;
+    var uOm = "oz";
+  } else if ($("#gramcheck").prop("checked")) {
+    var convFactor = 1;
+    var uOm = "g";
+  }
+  var serving = Math.round(slider.val() / convFactor);
   console.log(slider.data("food"));
   calorycalc = (slider.data("cals") / 100) * slider.val();
   console.log(calorycalc);
-  slider.parent().parent().find("span").text(Math.round(calorycalc));
-  slider.parent().parent().find("p").text(serving);
+  slider.parent().parent().find(".caldata").text(Math.round(calorycalc));
+  slider.parent().parent().find(".servSize").text(serving);
+  slider.parent().parent().find(".uom").text(uOm);
   totalCalories();
   activityTime();
+});
+
+$(".units").click(function () {
+  if ($("#ozcheck").prop("checked")) {
+    var convFactor = 28.3495;
+    var uOm = "oz";
+  } else if ($("#gramcheck").prop("checked")) {
+    var convFactor = 1;
+    var uOm = "g";
+  }
+  $(".uom").text(uOm);
+  for (var i = 0; i < $(".servSize").length; i++) {
+    var servingSizeGrams = Number($(".slider")[i].value);
+    console.log($(".slider")[i]);
+    console.log(servingSizeGrams);
+    $(".servSize")[i].textContent = Math.round(servingSizeGrams / convFactor);
+  }
 });
 
 // sums calories into total and displays above food list
@@ -153,7 +187,7 @@ function sportFunction(result) {
     console.log(sport, calBurned);
     $("#sportresults").append(
       `<li data-sport="${sport}">
-        Name: ${sport} <span style="display: none" class="actcals" >${calBurned}</span> Time: <span class="actdur">${time}</span><button class="delete" onClick="deleteActItem('${sport}')"><span class="icon is-small">
+        Name: ${sport} <span style="display: none" class="actcals" >${calBurned}</span> Time: <span class="actdur">${time}</span> <button class="delete" onClick="deleteActItem('${sport}')"><span class="icon is-small">
         <i class="fas fa-times"></i>
       </span></button>
         </li>
@@ -256,4 +290,35 @@ document.addEventListener("DOMContentLoaded", () => {
       closeAllModals();
     }
   });
+});
+
+// $("#saveprofile").on("click", function () {});
+
+// Local storage for modal
+var profile = $(".profile-info");
+var personName = $("#name");
+var personAge = $("#age");
+var personWeight = $("#weight");
+
+$(".save-profile").on("click", function (event) {
+  event.preventDefault();
+  $("#getstarted").hide();
+  $("#userinfo").attr("class", "section is-medium");
+  var personProfile = {
+    person: personName.val(),
+    age: personAge.val(),
+    weight: personWeight.val(),
+  };
+
+  if (JSON.parse(localStorage.getItem("profileInfo")) == null) {
+    profileInfo = [];
+  } else {
+    profileInfo = JSON.parse(localStorage.getItem("profileInfo"));
+  }
+  profileInfo.push(personProfile);
+  localStorage.setItem("profileInfo", JSON.stringify(profileInfo));
+  document.querySelector("#editname").innerHTML = personProfile.person;
+  document.querySelector("#editage").innerHTML = personProfile.age;
+  document.querySelector("#editweight").innerHTML =
+    personProfile.weight + " lbs";
 });
