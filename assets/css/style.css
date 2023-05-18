@@ -38,3 +38,12 @@ input[type="text"]:not(:placeholder-shown) {
   background-color: #fff;
   filter: brightness(100%);
 }
+.box {
+  position: relative;
+}
+
+.delete {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+}
