@@ -6,10 +6,10 @@ The application lets users input their own info and save it to a profile within 
 
 ## Technology used
 
-HTML
-JavaScript
-Jquery
-Bulma
+* HTML
+* JavaScript
+* Jquery
+* Bulma
 
 
 
