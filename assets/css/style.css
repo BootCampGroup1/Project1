@@ -16,3 +16,25 @@
     flex-wrap: wrap;
   }
 }
+
+input[type=text] {
+  width: 200px;
+  padding: 8px 20px 8px 45px;
+  border: #fff solid 2px;
+  font-size: 18px;
+  text-align: center;
+  border-radius: 30px;
+  background-position: 2% 40%;
+  background-repeat: no-repeat;
+  background-size: 30px;
+  background-color: transparent;
+  transition: 0.5s all ease-in-out;
+  filter: brightness(160%);
+}
+
+input[type=text]:focus,
+input[type=text]:not(:placeholder-shown){
+  width: 350px;
+  background-color: #fff;
+  filter: brightness(100%);
+}

@@ -1,5 +1,3 @@
-// prompt user for info
-
 // call nutrition API
 $("#foosearch").on("click", function (event) {
   var query = $("#food-input").val();
@@ -50,12 +48,13 @@ function foodFunction(result) {
     console.log(food, calories);
     console.log(convFactor);
     $("#foodresults").append(
-      `<li>
-        Name: ${food} Calories: <span class="caldata">${Math.round(
+      `<li class="block">
+        <p><strong>Food: </strong>${food} <strong>Calories: </strong><span class="caldata">${Math.round(
         calories
-      )}</span>
+      )}</span></p>
         <div class="slidecontainer">
-        <input data-food="${food}" data-cals="${calories}" type="range" min="0" max="500" step="10" value="${servingSizeGrams}" class="slider"><p><span class="servSize">${servingSizeConv}</span> <span class="uom">${uOm}</span></p><button class="delete" onClick="deleteFoodItem('${food}')"><i class="fas fa-times"></i></button>
+        <input data-food="${food}" data-cals="${calories}" type="range" min="0" max="500" step="10" value="${servingSizeGrams}" class="slider"><p><span class="servSize">${servingSizeConv}</span> <span class="uom">${uOm}</span> <button class="delete" onClick="deleteFoodItem('${food}')"><i class="fas fa-times"></i></button></p>
+        </div>
         </div>
         </li>
     `
@@ -156,8 +155,8 @@ var activityTime = function () {
 //Second API call
 $("#actsearch").on("click", function () {
   var activity = $("#activity").val().substring(1);
-  // var weight = $('#weightinput').val();
-  var weight = 500;
+  var weight = personWeight.val();
+  console.log(weight);
   console.log(activity);
   $.ajax({
     method: "GET",
@@ -186,10 +185,10 @@ function sportFunction(result) {
     var time = result[i].duration_minutes;
     console.log(sport, calBurned);
     $("#sportresults").append(
-      `<li data-sport="${sport}">
-        Name: ${sport} <span style="display: none" class="actcals" >${calBurned}</span> Time: <span class="actdur">${time}</span> <button class="delete" onClick="deleteActItem('${sport}')"><span class="icon is-small">
+      `<li data-sport="${sport}" class="block">
+        <p><strong>Activity: </strong>${sport} <span style="display: none" class="actcals" >${calBurned}</span></p> <p><strong>Time: </strong><span class="actdur">${time}</span> <button class="delete" onClick="deleteActItem('${sport}')"><span class="icon is-small">
         <i class="fas fa-times"></i>
-      </span></button>
+      </span></button></p>
         </li>
     `
     );
@@ -224,10 +223,6 @@ $(function () {
           response(newActivityArray);
         });
     },
-    // minLength: 2,
-    // select: function( event, ui ) {
-    //   log( "Selected: " + ui.item.value + " aka " + ui.item.id );
-    // }
   });
 });
 
@@ -321,4 +316,56 @@ $(".save-profile").on("click", function (event) {
   document.querySelector("#editage").innerHTML = personProfile.age;
   document.querySelector("#editweight").innerHTML =
     personProfile.weight + " lbs";
+    iniPage()
+});
+
+// initialize page
+var iniPage = function () {
+  if (localStorage.getItem("profileInfo") == null) {
+    console.log("Nope");
+  } else {
+    console.log("Yep");
+    // call profiles from local storage into array
+    var proList = []
+    proList = JSON.parse(localStorage.getItem("profileInfo")).reverse()
+    
+    console.log(proList);
+    $('#storedprofiles li').remove()
+    // display list of profile names (flip array and decrement)
+    for (var i = 0; i < Math.min(proList.length, 5); i++) {
+      var proName = proList[i].person
+      $('#storedprofiles').append(
+        `<li class='column has-text-white'>
+          <a class='loadprofiles'>
+           ${proName}
+          </a>
+        </li>`
+      )
+    }
+    
+  }
+}
+
+iniPage()
+
+$('.loadprofiles').on('click', function (event) {
+  $("#getstarted").hide();
+  $("#userinfo").attr("class", "section is-medium");
+  var loadLink = $(event.target)
+  var proName = loadLink.text().trim()
+  var proList = []
+  proList = JSON.parse(localStorage.getItem("profileInfo"))
+  var proIndex = proList.indexOf(proName)
+  function getProName(profile) {
+    return profile.person == proName;
+  }
+  var storedProfile = proList.find(getProName);
+  document.querySelector("#editname").innerHTML = proName;
+  document.querySelector("#editage").innerHTML = storedProfile.age;
+  document.querySelector("#editweight").innerHTML = storedProfile.weight + " lbs";
+})
+
+$('#clearprofile').on('click', function() {
+  localStorage.clear()
+  $('#storedprofiles li').remove()
 });
