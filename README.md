@@ -16,7 +16,7 @@ The application lets users input their own info and save it to a profile within 
 ## SITE LINK
 ![WorkitOff](https://github.com/BootCampGroup1/Work_It_Off/assets/128633609/e44189b6-ed89-49c1-b4d7-3a35831564f9)
 
-[https://bootcampgroup1.github.io/Project1/](https://bootcampgroup1.github.io/Work_It_Off/)
+[https://bootcampgroup1.github.io/Work_It_Off/](https://bootcampgroup1.github.io/Work_It_Off/)
 
 
 
