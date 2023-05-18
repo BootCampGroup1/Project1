@@ -147,7 +147,7 @@ var activityTime = function () {
     var durNeeded = actCals / calPh;
     console.log(durNeeded);
     console.log(actCals);
-    $(this).find(".actdur").text(Math.round(durNeeded));
+    $(this).find(".actdur").text(Math.round(durNeeded) + ' mins');
   });
 };
 
