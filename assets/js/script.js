@@ -157,6 +157,11 @@ var activityTime = function () {
 //Second API call
 $("#actsearch").on("click", function () {
   var activity = $("#activity").val().substring(1);
+  addActivity(activity)
+  $("#activity").val("");
+});
+
+function addActivity (activity) {
   var weight = personWeight.val();
   console.log(weight);
   console.log(activity);
@@ -174,8 +179,18 @@ $("#actsearch").on("click", function () {
       console.error("Error: ", jqXHR.responseText);
     },
   });
-  $("#activity").val("");
-});
+}
+function actList() {
+  var activities = [];
+  for (var i = 0; i < $('.activityname').length; i++){
+activities.push($('.activityname')[i].innerHTML);
+  }
+  console.log(activities);
+  $("#sportresults li").remove();
+  for (var i = 0; i < activities.length; i++) {
+    addActivity(activities[i].substring(1));
+  }
+}
 
 // Displays activity API results in li's
 function sportFunction(result) {
@@ -188,7 +203,7 @@ function sportFunction(result) {
     console.log(sport, calBurned);
     $("#sportresults").append(
       `<li data-sport="${sport}" class="box">
-        <p><strong>Activity: </strong>${sport} <span style="display: none" class="actcals" >${calBurned}</span></p> <p><strong>Time: </strong><span class="actdur">${time}</span> <button class="delete" onClick="deleteActItem('${sport}')"><span class="icon is-small">
+        <p><strong>Activity: </strong><span class='activityname'>${sport}</span> <span style="display: none" class="actcals" >${calBurned}</span></p> <p><strong>Time: </strong><span class="actdur">${time}</span> <button class="delete" onClick="deleteActItem('${sport}')"><span class="icon is-small">
         <i class="fas fa-times"></i>
       </span></button></p>
         </li>
@@ -363,6 +378,7 @@ var iniPage = function () {
     document.querySelector("#editweight").innerHTML =
       storedProfile.weight + " lbs";
     $('#clearprofile').show()
+    actList()
   });
 };
 
