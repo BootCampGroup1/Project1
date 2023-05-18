@@ -48,7 +48,7 @@ function foodFunction(result) {
     console.log(food, calories);
     console.log(convFactor);
     $("#foodresults").append(
-      `<li class="block">
+      `<li class="box">
         <p><strong>Food: </strong>${food} <strong>Calories: </strong><span class="caldata">${Math.round(
         calories
       )}</span></p>
@@ -187,7 +187,7 @@ function sportFunction(result) {
     var time = result[i].duration_minutes;
     console.log(sport, calBurned);
     $("#sportresults").append(
-      `<li data-sport="${sport}" class="block">
+      `<li data-sport="${sport}" class="box">
         <p><strong>Activity: </strong>${sport} <span style="display: none" class="actcals" >${calBurned}</span></p> <p><strong>Time: </strong><span class="actdur">${time}</span> <button class="delete" onClick="deleteActItem('${sport}')"><span class="icon is-small">
         <i class="fas fa-times"></i>
       </span></button></p>

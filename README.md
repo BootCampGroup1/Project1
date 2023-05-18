@@ -2,23 +2,21 @@
 
 ## Decription
 
-This application 
+The application lets users input their own info and save it to a profile within the local storage. The user then can search for what ever food they want and then add it to an unordered list which displays on the screen. The user can clear all of the food list items with a clear all button or individually with buttons assigned to each list item. Once the food is inputted the user can then search for an activity they enjoy. The application then shows how long the user has to do the inputted activity to burn the total amount of calories from the inputted food based on the users profile weight.   
 
 ## Technology used
 
-HTML
-JavaScript
-Jquery
-Bulma
-
-## Summary
+* HTML
+* JavaScript
+* Jquery
+* Bulma
 
 
 
 ## SITE LINK
 https://bootcampgroup1.github.io/Project1/
 
-![image](https://user-images.githubusercontent.com/128633609/236371033-668094db-da58-4588-87b9-cff975462997.png)
+
 
 
 ## License
