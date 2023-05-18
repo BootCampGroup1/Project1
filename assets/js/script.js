@@ -147,7 +147,7 @@ var activityTime = function () {
     var durNeeded = actCals / calPh;
     console.log(durNeeded);
     console.log(actCals);
-    $(this).find(".actdur").text(Math.round(durNeeded));
+    $(this).find(".actdur").text(Math.round(durNeeded) + ' mins');
   });
 };
 
@@ -316,7 +316,7 @@ $(".save-profile").on("click", function (event) {
   document.querySelector("#editage").innerHTML = personProfile.age;
   document.querySelector("#editweight").innerHTML =
     personProfile.weight + " lbs";
-    iniPage()
+  iniPage();
 });
 
 // initialize page
@@ -326,46 +326,46 @@ var iniPage = function () {
   } else {
     console.log("Yep");
     // call profiles from local storage into array
-    var proList = []
-    proList = JSON.parse(localStorage.getItem("profileInfo")).reverse()
-    
+    var proList = [];
+    proList = JSON.parse(localStorage.getItem("profileInfo")).reverse();
+
     console.log(proList);
-    $('#storedprofiles li').remove()
+    $("#storedprofiles li").remove();
     // display list of profile names (flip array and decrement)
     for (var i = 0; i < Math.min(proList.length, 5); i++) {
-      var proName = proList[i].person
-      $('#storedprofiles').append(
+      var proName = proList[i].person;
+      $("#storedprofiles").append(
         `<li class='column has-text-white'>
-          <a class='loadprofiles'>
+          <a class='loadprofiles'; style="color:white; text-shadow: 1px 1px 1px black">
            ${proName}
           </a>
         </li>`
-      )
+      );
     }
-    
   }
-}
+};
 
-iniPage()
+iniPage();
 
-$('.loadprofiles').on('click', function (event) {
+$(".loadprofiles").on("click", function (event) {
   $("#getstarted").hide();
   $("#userinfo").attr("class", "section is-medium");
-  var loadLink = $(event.target)
-  var proName = loadLink.text().trim()
-  var proList = []
-  proList = JSON.parse(localStorage.getItem("profileInfo"))
-  var proIndex = proList.indexOf(proName)
+  var loadLink = $(event.target);
+  var proName = loadLink.text().trim();
+  var proList = [];
+  proList = JSON.parse(localStorage.getItem("profileInfo"));
+  var proIndex = proList.indexOf(proName);
   function getProName(profile) {
     return profile.person == proName;
   }
   var storedProfile = proList.find(getProName);
   document.querySelector("#editname").innerHTML = proName;
   document.querySelector("#editage").innerHTML = storedProfile.age;
-  document.querySelector("#editweight").innerHTML = storedProfile.weight + " lbs";
-})
+  document.querySelector("#editweight").innerHTML =
+    storedProfile.weight + " lbs";
+});
 
-$('#clearprofile').on('click', function() {
-  localStorage.clear()
-  $('#storedprofiles li').remove()
+$("#clearprofile").on("click", function () {
+  localStorage.clear();
+  $("#storedprofiles li").remove();
 });
