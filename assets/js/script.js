@@ -319,10 +319,12 @@ $(".save-profile").on("click", function (event) {
   document.querySelector("#editweight").innerHTML =
     personProfile.weight + " lbs";
   iniPage();
+  $('#clearprofile').show()
 });
 
 // initialize page
 var iniPage = function () {
+  $('#clearprofile').hide()
   if (localStorage.getItem("profileInfo") == null) {
     console.log("Nope");
   } else {
@@ -345,27 +347,28 @@ var iniPage = function () {
       );
     }
   }
+  $(".loadprofiles").on("click", function (event) {
+    $("#getstarted").hide();
+    $("#userinfo").attr("class", "section is-medium");
+    var loadLink = $(event.target);
+    var proName = loadLink.text().trim();
+    var proList = [];
+    proList = JSON.parse(localStorage.getItem("profileInfo"));
+    function getProName(profile) {
+      return profile.person == proName;
+    }
+    var storedProfile = proList.find(getProName);
+    document.querySelector("#editname").innerHTML = proName;
+    document.querySelector("#editage").innerHTML = storedProfile.age;
+    document.querySelector("#editweight").innerHTML =
+      storedProfile.weight + " lbs";
+    $('#clearprofile').show()
+  });
 };
 
 iniPage();
 
-$(".loadprofiles").on("click", function (event) {
-  $("#getstarted").hide();
-  $("#userinfo").attr("class", "section is-medium");
-  var loadLink = $(event.target);
-  var proName = loadLink.text().trim();
-  var proList = [];
-  proList = JSON.parse(localStorage.getItem("profileInfo"));
-  var proIndex = proList.indexOf(proName);
-  function getProName(profile) {
-    return profile.person == proName;
-  }
-  var storedProfile = proList.find(getProName);
-  document.querySelector("#editname").innerHTML = proName;
-  document.querySelector("#editage").innerHTML = storedProfile.age;
-  document.querySelector("#editweight").innerHTML =
-    storedProfile.weight + " lbs";
-});
+
 
 $("#clearprofile").on("click", function () {
   localStorage.clear();
