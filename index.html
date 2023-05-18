@@ -22,48 +22,54 @@
   <body>
     <!-- BULMA NAVBAR -->
 
-    <div class="block" style="background-color: lightgrey">
-      <nav
-        class="nav columns is-justify-content-space-between is-align-items-flex-end mt-1"
-        style="background-color: white"
-      >
-        <div class="nav-left column is-one-third mt-1">
-          <a href="./index.html">
-            <h1 class="title is-3">Work it Off!</h1>
-          </a>
-        </div>
+    <div
+    class="block"
+    style="background-image: url('assets/imgs/diamondPlate.jpg')"
+  >
+    <nav
+      class="nav columns is-justify-content-space-between is-align-items-flex-end mt-1"
+      style="background-color: white"
+    >
+      <div class="nav-left column is-one-third mt-1">
+        <a href="./index.html">
+          <h1 class="title is-3">Work it Off!</h1>
+        </a>
+      </div>
 
-        <div
-          class="nav-center column is-one-third is-flex is-justify-content-center"
+      <div
+        class="nav-center column is-one-third is-flex is-justify-content-center"
+      >
+        <a
+          href="https://github.com/BootCampGroup1/Project1"
+          target="_blank"
+          class="nav-item"
         >
-          <a
-            href="https://github.com/BootCampGroup1/Project1"
-            target="_blank"
-            class="nav-item"
-          >
-            <span class="icon">
-              <i class="fa fa-github fa-3x"></i>
-            </span>
-          </a>
-        </div>
-        <div
-          class="nav-right nav-menu column is-align-self-center is-flex is-justify-content-flex-end is-one-third"
-        >
-          <a href="./aboutUs.html" class="nav-item" style="font-size: 22px">
-            <span style="margin-right: 8px">Meet the Team</span>
-            <span class="icon is-small">
-              <i class="fa-solid fa-thumbs-up"></i>
-            </span>
-          </a>
-        </div>
-      </nav>
+          <span class="icon">
+            <i class="fa fa-github fa-3x"></i>
+          </span>
+        </a>
+      </div>
+      <div
+        class="nav-right nav-menu column is-align-self-center is-flex is-justify-content-flex-end is-one-third"
+      >
+        <a href="./aboutUs.html" class="nav-item" style="font-size: 22px">
+          <span style="margin-right: 8px; color: #2b292d;">Meet the Team</span>
+          <span class="icon is-small">
+            <i class="fa-solid fa-thumbs-up" style="color: #2b292d"></i>
+          </span>
+        </a>
+      </div>
+    </nav>
 
       <div class="container">
         <section class="section is-medium" id="getstarted">
-          <h1 class="title has-text-centered">Get Started</h1>
-          <h2 class="subtitle has-text-centered">
-            Welcome to <strong>"Work it Off!"</strong>, your personal guide to
-            eating with freedom and keeping off the pounds.
+          <h1 class="title has-text-centered" style="color: white; text-shadow: 1px 1px 2px black;">
+            Get Started
+          </h1>
+          <h2 class="subtitle has-text-centered" style="color: white; text-shadow: 1px 1px 2px black;">
+            Welcome to <strong style="color: white; text-shadow: 1px 1px 2px black;">"Work it Off!"</strong>,
+            your personal guide to eating with freedom and keeping off the
+            pounds.
           </h2>
           <button
             class="js-modal-trigger button is-info is-fullwidth"
@@ -72,23 +78,34 @@
             We Just Need a Few Details
           </button>
         </section>
+        <div >
+          <button id="clearprofile">Clear Profile</button>
+<ul class="columns is-justify-content-space-between is-align-items-flex-end" id="storedprofiles">
+
+</ul>
+        </div>
         <section class="section is-medium is-hidden" id="userinfo">
-          <h1 class="title has-text-centered">Your info</h1>
-          <h3 class="subtitle has-text-centered">
-            <strong>Name:</strong><span id="editname"></span>
+          <h1 class="title has-text-centered" style="color: white; text-shadow: 1px 1px 2px black;">
+            Your info
+          </h1>
+          <h3 class="subtitle has-text-centered" style="color: white; text-shadow: 1px 1px 2px black;">
+            <strong style="color: white; text-shadow: 1px 1px 2px black;">Name: </strong
+            ><span id="editname"></span>
           </h3>
-          <h3 class="subtitle has-text-centered">
-            <strong>Age:</strong><span id="editage"></span>
+          <h3 class="subtitle has-text-centered" style="color: white; text-shadow: 1px 1px 2px black;">
+            <strong style="color: white; text-shadow: 1px 1px 2px black;">Age: </strong
+            ><span id="editage"></span>
           </h3>
-          <h3 class="subtitle has-text-centered">
-            <strong>Weight:</strong><span id="editweight"></span>
+          <h3 class="subtitle has-text-centered" style="color: white; text-shadow: 1px 1px 2px black;">
+            <strong style="color: white; text-shadow: 1px 1px 2px black;">Weight: </strong
+            ><span id="editweight"></span>
           </h3>
           <button
             id="editinfo"
             class="js-modal-trigger button is-info is-fullwidth"
             data-target="input-modal"
           >
-            Edit Info
+            New Profile
           </button>
         </section>
         <!-- ADDED SOME BULMA STYLING TO THE PAGE -->
@@ -108,25 +125,27 @@
                         type="text"
                         placeholder="Search Foods"
                     /></label>
-                    <label class="radio">
-                      <input
-                        type="radio"
-                        class="units"
-                        id="gramcheck"
-                        name="units"
-                      />
-                      grams
-                    </label>
-                    <label class="radio">
-                      <input
-                        type="radio"
-                        class="units"
-                        id="ozcheck"
-                        name="units"
-                        checked
-                      />
-                      ounces
-                    </label>
+                    <div>
+                      <label class="radio">
+                        <input
+                          type="radio"
+                          class="units"
+                          id="gramcheck"
+                          name="units"
+                        />
+                        grams
+                      </label>
+                      <label class="radio">
+                        <input
+                          type="radio"
+                          class="units"
+                          id="ozcheck"
+                          name="units"
+                          checked
+                        />
+                        ounces
+                      </label>
+                    </div>
                   </div>
                   <div class="control">
                     <button class="button is-primary is-light" id="foosearch">
@@ -142,7 +161,18 @@
                 <ul id="foodresults" class="final-result"></ul>
                 <p class="has-text-centered has-text-weight-bold is-size-5">
                   Total Calories: <span id="totalcal"></span>
-                </p>
+                <!-- test list tiems-->
+                <!-- <ul class="column is-block">
+                  <li data-sport="${sport}">
+                    <p>Name:  <span style="display: none" class="nameinput" ></span></p> 
+                    <p>Age: <span class="ageinput"></span></p> 
+                    <p>Weight: <span class="weightinput"></span><p>
+                    <button class="delete" onClick="deleteActItem('${sport}')"><span class="icon is-small">
+                    <i class="fas fa-times"></i>
+                    </span></button>
+                  </li>
+                </ul> -->
+                </p> 
               </div>
             </div>
           </div>
@@ -196,19 +226,19 @@
           <input
             id="name"
             class="block input is-info"
-            type="text"
+            type="search"
             placeholder="NAME"
           />
           <input
             id="age"
             class="block input is-info"
-            type="text"
+            type="search"
             placeholder="AGE"
           />
           <input
             id="weight"
             class="block input is-info"
-            type="text"
+            type="number"
             placeholder="WEIGHT"
           />
         </section>

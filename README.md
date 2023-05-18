@@ -1,9 +1,31 @@
-# Project1
+# Project 1
 
-## User Story
-I want a web application that tells me how many calories an inputted food is and then tells me how much of a certian activity will burn that many calories and vise versa 
+## Decription
+
+This application 
+
+## Technology used
+
+HTML
+JavaScript
+Jquery
+Bulma
+
+## Summary
 
 
 
-## Acceptance criteria
+## SITE LINK
+https://bootcampgroup1.github.io/Project1/
 
+![image](https://user-images.githubusercontent.com/128633609/236371033-668094db-da58-4588-87b9-cff975462997.png)
+
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
+
+## Credits
+
+Profile display - search for object by attribute:
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
