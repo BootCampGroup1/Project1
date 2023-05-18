@@ -147,7 +147,9 @@ var activityTime = function () {
     var durNeeded = actCals / calPh;
     console.log(durNeeded);
     console.log(actCals);
-    $(this).find(".actdur").text(Math.round(durNeeded) + ' mins');
+    $(this)
+      .find(".actdur")
+      .text(Math.round(durNeeded) + " mins");
   });
 };
 
@@ -336,7 +338,7 @@ var iniPage = function () {
       var proName = proList[i].person;
       $("#storedprofiles").append(
         `<li class='column has-text-white'>
-          <a class='loadprofiles'; style="color:white; text-shadow: 1px 1px 1px black">
+          <a class='loadprofiles'; style="color:white; text-shadow: 1px 1px 1px black";>
            ${proName}
           </a>
         </li>`
